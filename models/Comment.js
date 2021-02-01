@@ -18,6 +18,19 @@ const CommentSchema = new Schema({
         type: String,
         required: true
     },
+
+ //Reference users collection
+ users:[{ type: Schema.ObjectId, 
+    ref: 'User',
+    required: true
+ }],
+
+ //Reference Comments
+ comments:[{
+     type: Schema.ObjectId,
+     ref:'Comment'
+
+ }]
 });
 
 

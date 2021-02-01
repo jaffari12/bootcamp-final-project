@@ -13,7 +13,7 @@ const PostSchema = new Schema({
     text: {
         type: String
     },
-    ifDeleted: {
+    isDeleted: {
         type: Boolean,
         default: false
     }, 
@@ -21,6 +21,19 @@ const PostSchema = new Schema({
         type: Date,
         default: Date.now
     },
+
+    //Reference users collection
+    users:[{ type: Schema.ObjectId, 
+        ref: 'User',
+        required: true
+     }],
+
+     //Reference Comments
+     comments:[{
+         type: Schema.ObjectId,
+         ref:'Comment'
+
+     }]
 
 });
 
