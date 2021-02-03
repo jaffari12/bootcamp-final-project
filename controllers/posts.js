@@ -29,7 +29,7 @@ const editPost = async (req, res, next) => {
   try {
     const { text } = req.body;
     const post = await User.findByIdAndUpdate({ text }, { new: true });
-    res.json({ success: true, msg: `Post edited ${text} `, data: edited })
+    res.json({ success: true, msg: `Post edited ${text} `, data: post })
   } catch(err) {
     next(err)
   }

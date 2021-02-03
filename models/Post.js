@@ -23,17 +23,15 @@ const PostSchema = new Schema({
     },
 
     //Reference users collection
-    users:[{ type: Schema.ObjectId, 
+    author: {
+        type: mongoose.Schema.ObjectId,
         ref: 'User',
-        required: true
-     }],
+        required: [true, 'Please add a userId']
+      },
 
-     //Reference Comments
-     comments:[{
-         type: Schema.ObjectId,
-         ref:'Comment'
 
-     }]
+
+    
 
 });
 
