@@ -24,8 +24,44 @@ const getUsers = async (req, res, next) => {
 };
 
 
+// create login controller
+// when user login will request for email and password from body
+// if no email or pswd provided will send status 400 with the message.
+
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      res.status(400).send('Please provide an email and password')
+    }
+// we ask mongoose to search by email that has been provided by the user to login
+// usually we dont select the password as we set it to false but we have bring it again to check on pswd if it matches 
+    const user = await User.findOne({ email }).select('+password');
+
+    // if no user find it will send the below response 
+    if (!user) {
+      res.status(401).send('Invalid credentials')
+    }
+// check if the password matches 
+    const doesPassMatch = await user.matchPassword(password);
+    if (!doesPassMatch) {
+      res.status(401).send('Invalid credentials')
+    }
+//if password matches then we respond with jwt token
+    const token = user.getSignedJwtToken();
+
+    res.json({ success: true, token })
+
+  } catch(err) {
+    next(err)
+  }
+};
+
+
 module.exports = {
     getUsers,
     createUser,
+    login
    
 }
