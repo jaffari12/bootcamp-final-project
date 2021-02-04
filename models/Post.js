@@ -23,16 +23,18 @@ const PostSchema = new Schema({
     },
 
     //Reference users collection
-    author: {
+    _userId: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: [true, 'Please add a userId']
       },
-
-
-
+ 
+   // Reference comment collection
+   _postId:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Comment'
     
-
+   }
 });
 
 

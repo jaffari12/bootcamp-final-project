@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const mongoose = require('mongoose');
 
-//get all the users data
+//get all the users data ( this is working)
 
 const getUsers = async (req, res, next) => {
     try {
@@ -12,7 +12,18 @@ const getUsers = async (req, res, next) => {
     }
   };
 
-//Register newuser
+  // get a specific user by ID ( this is working)
+  const getUser = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const user = await User.findById(id);
+      res.json({ success: true, msg: 'show selected user', data: user })
+    } catch(err) {
+      next(err)
+    }
+  };
+  
+//Register new user ( this is working)
 
   const createUser = async (req, res, next) => {
     try {
@@ -62,6 +73,7 @@ const login = async (req, res, next) => {
 
 module.exports = {
     getUsers,
+    getUser,
     createUser,
     login
    

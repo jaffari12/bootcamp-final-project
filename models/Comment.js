@@ -20,18 +20,19 @@ const CommentSchema = new Schema({
     },
 
  //Reference post collection
- parent:{ type: Schema.ObjectId, 
+ _postId:{ type: Schema.ObjectId, 
     ref: 'Post',
     required: [true, 'Please add a parent']
  },
 
  //Reference users collection
- author: {
+ _userId: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
     required: [true, 'Please add a userId']
   },
  
+
 });
 
 
