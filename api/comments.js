@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getComments,
   getComment,
-  getUserComments,
+  
   submitNewComment,
   editComment,
   deleteComment
@@ -23,7 +23,5 @@ api
  .patch(editComment)
  .delete(deleteComment)
 
-api
-.route('/:id/:id')
-.get(getUserComments) 
+ 
 module.exports = api;

@@ -2,8 +2,7 @@ const express = require("express");
 const {
   getPosts,
   getPost,
-  //getUserPosts,
-  submitNewPost,
+   submitNewPost,
   editPost,
   deletePost
  } = require('../controllers/posts');

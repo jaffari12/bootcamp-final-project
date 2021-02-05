@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 const mongoose = require('mongoose');
 
 //get all the users data ( this is working)
@@ -31,6 +32,18 @@ const getUsers = async (req, res, next) => {
       const { id } = req.params;  
       const posts = await Post.find({ _userId: id, isDeleted: false }).populate('_userId');
       res.json({ success: true, msg: `posts of user with user id ${id} retrieved`, data: posts})
+    } catch(err) {
+      next(err)
+    }
+  };
+
+  // get all comments of a specific user (working)
+
+  const getUserComments = async (req, res, next) => {
+    try {
+      const { id } = req.params;  
+      const comments = await Comment.find({ _userId: id, _postId: id, isDeleted: false });
+      res.json({ success: true, msg: `Comments of user with user id ${id} retrieved`, data: comments})
     } catch(err) {
       next(err)
     }
@@ -91,6 +104,7 @@ module.exports = {
     getUser,
     createUser,
     getUserPosts,
+    getUserComments,
     login
    
 }

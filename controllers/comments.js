@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const getComments = async (req, res, next) => {
     try {
-      const comments = await Comment.find({isDeleted: false});
+      const comments = await Comment.find().populate('_postId').populate('_userId');
       res.json({ success: true, msg: 'show all comments', data: comments})
     } catch(err) {
       next(err)
@@ -18,23 +18,13 @@ const getComments = async (req, res, next) => {
   const getComment = async (req, res, next) =>{
     try{
       const { id } = req.params;
-      const comment = await Comment.findById({_id: id, isDeleted: false});
+      const comment = await Comment.findById(id).populate('_postId').populate('_userId');
       res.json({ success: true, msg: `comment with comment id ${id} retrieved`, data: comment})
     } catch(err) {
       next(err)
     }
   };
-// get all comments of a specific user (getting null)
 
-  const getUserComments = async (req, res, next) => {
-    try {
-      const { id } = req.params;  
-      const comments = await Comment.find({ _userId: id, _postId: id, isDeleted: false })
-      res.json({ success: true, msg: `Comments of user with user id ${id} retrieved`, data: comments})
-    } catch(err) {
-      next(err)
-    }
-  };
 
   //Submit a new comment (working)
   const submitNewComment = async (req, res, next) => {
@@ -74,7 +64,6 @@ try{
   module.exports = {
     getComments,
     getComment,
-    getUserComments,
     submitNewComment,
     editComment,
     deleteComment

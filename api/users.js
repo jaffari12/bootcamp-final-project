@@ -3,7 +3,8 @@ const {
   getUsers,
   getUser,
   createUser,
-  getUserPosts
+  getUserPosts,
+  getUserComments
  } = require('../controllers/users');
 
 const api = express.Router();
@@ -20,5 +21,9 @@ api
 api
 .route('/:id/posts')
 .get(getUserPosts)
+
+api
+.route('/:id/comments')
+.get(getUserComments)
 
 module.exports = api;
