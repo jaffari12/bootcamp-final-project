@@ -15,15 +15,15 @@ const getPosts = async (req, res, next) => {
   const getPost = async (req, res, next) =>{
     try{
       const { id } = req.params;
-      const posts = await Post.findById({_id: id, isDeleted: false});
+      const post = await Post.findById({_id: id, isDeleted: false});
       console.log(id);
-      res.json({ success: true, msg: `posts with post id ${id} retrieved`, data: posts})
+      res.json({ success: true, msg: `posts with post id ${id} retrieved`, data: post})
     } catch(err) {
       next(err)
     }
   };
    
-  // get all posts of a specific user ( working)
+  // get all posts of a specific user (working)
   const getUserPosts = async (req, res, next) => {
     try {
       const { id } = req.params;  
@@ -34,7 +34,7 @@ const getPosts = async (req, res, next) => {
     }
   };
 
-//Submit a new post 
+//Submit a new post (working)
   const submitNewPost = async (req, res, next) => {
     try {
     const { title, link, text, _userId } = req.body;
@@ -46,7 +46,7 @@ const getPosts = async (req, res, next) => {
   }
 };
 
-//Edit a post 
+//Edit a post (working)
 const editPost = async (req, res, next) => {
   try {
     const patchPost = req.body;
@@ -58,7 +58,7 @@ const editPost = async (req, res, next) => {
   }
 };
 
-//Delete a post (not working)
+//Delete a post ( working)
 const deletePost = async (req, res, next) =>{
 try{
   const id= req.params.id;

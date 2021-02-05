@@ -16,7 +16,7 @@ const CommentSchema = new Schema({
     },
     postLink: {
         type: String,
-        required: true
+        required: false
     },
 
  //Reference post collection
