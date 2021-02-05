@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getPosts,
   getPost,
-  getUserPosts,
+  //getUserPosts,
   submitNewPost,
   editPost,
   deletePost
@@ -18,8 +18,8 @@ api
 
 api
 .route('/:id')
-.get(getUserPosts)
 .get(getPost)
+
 .patch(editPost)
 .delete(deletePost)
 

@@ -13,10 +13,11 @@ const getPosts = async (req, res, next) => {
 
   //get specific post by id (null data)
   const getPost = async (req, res, next) =>{
+    console.log("hello post");
     try{
       const { id } = req.params;
-      const post = await Post.findById({_id: id, isDeleted: false});
-      console.log(id);
+      const post = await Post.findById(id);
+     
       res.json({ success: true, msg: `posts with post id ${id} retrieved`, data: post})
     } catch(err) {
       next(err)
@@ -24,15 +25,15 @@ const getPosts = async (req, res, next) => {
   };
    
   // get all posts of a specific user (working )
-  const getUserPosts = async (req, res, next) => {
-    try {
-      const { id } = req.params;  
-      const posts = await Post.find({ _userId: id, isDeleted: false }).populate('_userId').populate('_postId');
-      res.json({ success: true, msg: `posts of user with user id ${id} retrieved`, data: posts})
-    } catch(err) {
-      next(err)
-    }
-  };
+  // const getUserPosts = async (req, res, next) => {
+  //   try {
+  //     const { id } = req.params;  
+  //     const posts = await Post.find({ _userId: id, isDeleted: false }).populate('_userId').populate('_postId');
+  //     res.json({ success: true, msg: `posts of user with user id ${id} retrieved`, data: posts})
+  //   } catch(err) {
+  //     next(err)
+  //   }
+  // };
 
 //Submit a new post (working)
   const submitNewPost = async (req, res, next) => {
@@ -72,7 +73,7 @@ try{
 module.exports = {
     getPosts,
     getPost,
-    getUserPosts,
+    // getUserPosts,
     submitNewPost,
     editPost,
     deletePost
