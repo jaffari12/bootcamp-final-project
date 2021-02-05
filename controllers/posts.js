@@ -23,7 +23,7 @@ const getPosts = async (req, res, next) => {
     }
   };
    
-  // get all posts of a specific user (working)
+  // get all posts of a specific user (getting null )
   const getUserPosts = async (req, res, next) => {
     try {
       const { id } = req.params;  
@@ -40,7 +40,7 @@ const getPosts = async (req, res, next) => {
     const { title, link, text, _userId } = req.body;
     
     const post = await Post.insertMany({ title, link, text, _userId},  {new: true});
-    res.json({ success: true, msg: `Submitted new post  ${text} `, data: post })
+    res.json({ success: true, msg: `submitted new post  ${text} `, data: post })
 } catch(err) {
     next(err)
   }
@@ -52,7 +52,7 @@ const editPost = async (req, res, next) => {
     const patchPost = req.body;
     const _id = req.params.id
     const post = await Post.updateOne({_id: _id}, patchPost, { new: true });
-    res.json({ success: true, msg: `Post edited ${post.text}`, data: post })
+    res.json({ success: true, msg: `post edited ${post.text}`, data: post })
   } catch(err) {
     next(err)
   }

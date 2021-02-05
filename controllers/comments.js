@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const getComments = async (req, res, next) => {
     try {
-      const comments = await Comment.find();
+      const comments = await Comment.find({isDeleted: false});
       res.json({ success: true, msg: 'show all comments', data: comments})
     } catch(err) {
       next(err)
@@ -42,7 +42,7 @@ const getComments = async (req, res, next) => {
     const { text, postLink, _userId, _postId } = req.body;
     
     const comment = await Comment.insertMany({ text, postLink, _userId, _postId},  {new: true});
-    res.json({ success: true, msg: `Submitted new comment ${comment.text} `, data: comment })
+    res.json({ success: true, msg: `submitted new comment ${comment.text} `, data: comment })
 } catch(err) {
     next(err)
   }
@@ -54,7 +54,7 @@ const editComment = async (req, res, next) => {
     const patchComment = req.body;
     const _id = req.params.id
     const comment = await Comment.updateOne({_id: _id}, patchComment, { new: true });
-    res.json({ success: true, msg: `Comment edited ${comment.text}`, data: comment })
+    res.json({ success: true, msg: `comment edited ${comment.text}`, data: comment })
   } catch(err) {
     next(err)
   }
