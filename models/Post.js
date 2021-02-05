@@ -5,7 +5,7 @@ const PostSchema = new Schema({
     title: {
         type: String,
         required: true,
-        maxlength: 25
+        maxlength: 50
     },
     link: {
         type: String

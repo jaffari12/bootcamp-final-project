@@ -42,7 +42,7 @@ const getComments = async (req, res, next) => {
     const { text, postLink, _userId, _postId } = req.body;
     
     const comment = await Comment.insertMany({ text, postLink, _userId, _postId},  {new: true});
-    res.json({ success: true, msg: `submitted new comment ${comment.text} `, data: comment })
+    res.json({ success: true, msg: `submitted new comment ${text} `, data: comment })
 } catch(err) {
     next(err)
   }
