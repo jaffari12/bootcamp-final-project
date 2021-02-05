@@ -9,7 +9,7 @@ const auth = require('./api/auth'); //need api auth for registration
 const errorHandler = require('./middleware/error');
 const cors = require('cors');
 const server = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 //connect or initalize Mongo  database
 const connectDB = require('./dbinit');
