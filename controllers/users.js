@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Post = require('../models/Post');
 const mongoose = require('mongoose');
 
 //get all the users data ( this is working)
@@ -22,6 +23,19 @@ const getUsers = async (req, res, next) => {
       next(err)
     }
   };
+
+
+// get all posts of a specific user (working )
+  const getUserPosts = async (req, res, next) => {
+    try {
+      const { id } = req.params;  
+      const posts = await Post.find({ _userId: id, isDeleted: false }).populate('_userId');
+      res.json({ success: true, msg: `posts of user with user id ${id} retrieved`, data: posts})
+    } catch(err) {
+      next(err)
+    }
+  };
+
   
 //Register new user ( this is working)
 
@@ -76,6 +90,7 @@ module.exports = {
     getUsers,
     getUser,
     createUser,
+    getUserPosts,
     login
    
 }

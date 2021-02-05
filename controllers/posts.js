@@ -24,17 +24,7 @@ const getPosts = async (req, res, next) => {
     }
   };
    
-  // get all posts of a specific user (working )
-  // const getUserPosts = async (req, res, next) => {
-  //   try {
-  //     const { id } = req.params;  
-  //     const posts = await Post.find({ _userId: id, isDeleted: false }).populate('_userId').populate('_postId');
-  //     res.json({ success: true, msg: `posts of user with user id ${id} retrieved`, data: posts})
-  //   } catch(err) {
-  //     next(err)
-  //   }
-  // };
-
+  
 //Submit a new post (working)
   const submitNewPost = async (req, res, next) => {
     try {
