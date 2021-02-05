@@ -4,19 +4,18 @@ const mongoose = require('mongoose');
 //get all the posts data (this works fine)
 const getPosts = async (req, res, next) => {
     try {
-      const posts = await Post.find({isDeleted: false});
+      const posts = await Post.find().populate('_userId');
       res.json({ success: true, msg: 'show all posts', data: posts })
     } catch(err) {
       next(err)
     }
   };
 
-  //get specific post by id (null data)
+  //get specific post by id (ok )
   const getPost = async (req, res, next) =>{
-    console.log("hello post");
-    try{
+      try{
       const { id } = req.params;
-      const post = await Post.findById(id);
+      const post = await Post.findById(id).populate('_userId');
      
       res.json({ success: true, msg: `posts with post id ${id} retrieved`, data: post})
     } catch(err) {
@@ -63,7 +62,6 @@ try{
 module.exports = {
     getPosts,
     getPost,
-    // getUserPosts,
     submitNewPost,
     editPost,
     deletePost
