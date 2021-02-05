@@ -71,7 +71,6 @@ try{
   }
 };
 
-
   module.exports = {
     getComments,
     getComment,
