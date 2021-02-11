@@ -1,11 +1,12 @@
 const Post = require('../models/Post');
+
 const mongoose = require('mongoose');
 
 //get all the posts data (this works fine)
 const getPosts = async (req, res, next) => {
     try {
       const posts = await Post.find().populate('_userId');
-      res.json({ success: true, msg: 'show all posts', data: posts })
+      res.json({ success: true, msg: 'show all posts', data: posts  })
     } catch(err) {
       next(err)
     }

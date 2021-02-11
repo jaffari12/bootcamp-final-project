@@ -55,7 +55,7 @@ const getUsers = async (req, res, next) => {
   const createUser = async (req, res, next) => {
     try {
     const { username, email, password } = req.body;
-    const user = await User.create({ username, email, password});
+     const user = await User.create({ username, email, password});
     res.json({ success: true, msg: 'new user create', data: user })
 } catch(err) {
     next(err)
