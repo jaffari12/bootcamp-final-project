@@ -39,7 +39,7 @@ UserSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET);
 };
 
-//  match user entered password ot hashed password in db
+//  match user entered password to hashed password in db
 UserSchema.methods.matchPassword = async function (enteredPass) {
   return await bcrypt.compare(enteredPass, this.password);
 };

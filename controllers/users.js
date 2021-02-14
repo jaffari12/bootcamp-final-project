@@ -87,7 +87,10 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      res.status(400).send("Please provide an email and password");
+      res.status(400).json({
+        success: false,
+        error: "Please provide an email and password",
+      });
     }
     // we ask mongoose to search by email that has been provided by the user to login
     // usually we dont select the password as we set it to false but we have bring it again to check on pswd if it matches
@@ -95,12 +98,12 @@ const login = async (req, res, next) => {
 
     // if no user find it will send the below response
     if (!user) {
-      res.status(401).send("Invalid credentials");
+      res.status(401).json({ success: false, error: "Invalid credentials" });
     }
     // check if the password matches
     const doesPassMatch = await user.matchPassword(password);
     if (!doesPassMatch) {
-      res.status(401).send("Invalid credentials");
+      res.status(401).json({ success: false, error: "Invalid Password" });
     }
     //if password matches then we respond with jwt token
     const token = user.getSignedJwtToken();
