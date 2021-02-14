@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: [true, "The name field is required"], // true means not null
-    minlength: [5, "Username must be 5 characters or more."],
+    minlength: [3, "Username must be 3 characters or more."],
     maxlength: [50, "The name field should contain a max of 50 chars"],
   },
   email: {
