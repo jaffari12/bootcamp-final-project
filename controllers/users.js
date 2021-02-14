@@ -68,9 +68,11 @@ const createUser = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     const user = await User.create({ username, email, password });
+
     // create token
     const token = user.getSignedJwtToken();
-    res.json({ success: true, msg: "new user create", data: user });
+
+    res.json({ success: true, msg: "new user create", token, data: user });
   } catch (err) {
     next(err);
   }
