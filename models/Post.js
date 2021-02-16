@@ -1,41 +1,39 @@
-const mongoose = require('mongoose');
-const Schema= mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-        maxlength: 50
-    },
-    link: {
-        type: String
-    },
-    text: {
-        type: String
-    },
-    isDeleted: {
-        type: Boolean,
-        default: false
-    }, 
-    createdDt: {
-        type: Date,
-        default: Date.now
-    },
+  title: {
+    type: String,
+    required: true,
+    maxlength: 50,
+  },
+  link: {
+    type: String,
+  },
+  text: {
+    type: String,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  createdDt: {
+    type: Date,
+    default: Date.now,
+  },
 
-    //Reference users collection
-    _userId: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User',
-        required: [true, 'Please add a userId']
-      },
- 
-   // Reference comment collection
-   _postId:{
+  //Reference users collection
+  _userId: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Comment'
-    
-   }
+    ref: "User",
+    required: [true, "Please add a userId"],
+  },
+
+  // Reference comment collection
+  _postId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Comment",
+  },
 });
 
-
-module.exports = mongoose.model('Post', PostSchema);
+module.exports = mongoose.model("Post", PostSchema);
