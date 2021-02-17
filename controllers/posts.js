@@ -42,7 +42,7 @@ const submitNewPost = async (req, res, next) => {
     res.json({
       success: true,
       msg: `submitted new post  ${text} `,
-      data: post,
+      data: { ...post, authenticated: true },
     });
   } catch (err) {
     next(err);

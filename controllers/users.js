@@ -108,7 +108,7 @@ const login = async (req, res, next) => {
     //if password matches then we respond with jwt token
     const token = user.getSignedJwtToken();
 
-    res.json({ success: true, token });
+    res.json({ success: true, token, id: user._id });
   } catch (err) {
     next(err);
   }
